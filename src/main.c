@@ -2954,7 +2954,8 @@ void se_capture_state(se_core_state_t* core, se_save_state_t * save_state){
   se_screenshot(save_state->screenshot, &save_state->screenshot_width, &save_state->screenshot_height);
 }
 void se_restore_state(se_core_state_t* core, se_save_state_t * save_state){
-  if(!save_state->valid || save_state->system != emu_state.system||(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in))return; 
+  //if(!save_state->valid || save_state->system != emu_state.system||(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in))return; 
+  if(!save_state->valid || save_state->system != emu_state.system)return;
   *core=save_state->state;
 #ifdef ENABLE_RETRO_ACHIEVEMENTS
   retro_achievements_restore_state(save_state->state.rc_buffer);
