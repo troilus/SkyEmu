@@ -3208,7 +3208,7 @@ static float se_draw_debug_panels(float screen_x, float sidebar_w, float y, floa
       igSetNextWindowSize((ImVec2){w, height}, ImGuiCond_Always);
       igBegin(se_localize_and_cache(desc->label),&desc->visible, ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize);
       if(gui_state.settings.hardcore_mode && gui_state.ra_logged_in && desc->allow_hardcore == false){
-        se_text("Disabled in Hardcore Mode");
+        //se_text("Disabled in Hardcore Mode");
       }else desc->function();
   
       float bottom_padding =0;
@@ -5960,7 +5960,8 @@ void se_draw_menu_panel(){
   ImGuiStyle *style = igGetStyle();
   int win_w = igGetWindowContentRegionWidth();
   se_section(ICON_FK_FLOPPY_O " Save States");
-  if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in)se_text("Disabled in Hardcore Mode");
+  if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in)
+//se_text("Disabled in Hardcore Mode");
   else{
     if (cloud_state.drive){
       if (igBeginTabBar("Saves",ImGuiTabBarFlags_None)){
@@ -6028,7 +6029,8 @@ void se_draw_menu_panel(){
 
   if(emu_state.system==SYSTEM_NDS || emu_state.system == SYSTEM_GBA || emu_state.system == SYSTEM_GB){
     se_section(ICON_FK_KEY " Action Replay Codes");
-    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
+    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) 
+    //se_text("Disabled in Hardcore Mode");
     else{
       int free_cheat_index = -1; 
       for(int i=0;i<SE_NUM_CHEATS;i++){
