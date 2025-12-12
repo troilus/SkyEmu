@@ -3209,6 +3209,7 @@ static float se_draw_debug_panels(float screen_x, float sidebar_w, float y, floa
       igBegin(se_localize_and_cache(desc->label),&desc->visible, ImGuiWindowFlags_NoCollapse|ImGuiWindowFlags_NoResize);
       if(gui_state.settings.hardcore_mode && gui_state.ra_logged_in && desc->allow_hardcore == false){
         //se_text("Disabled in Hardcore Mode");
+        desc->function();
       }else desc->function();
   
       float bottom_padding =0;
@@ -5960,8 +5961,8 @@ void se_draw_menu_panel(){
   ImGuiStyle *style = igGetStyle();
   int win_w = igGetWindowContentRegionWidth();
   se_section(ICON_FK_FLOPPY_O " Save States");
-  if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
-  else{
+  //if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
+  //else{
     if (cloud_state.drive){
       if (igBeginTabBar("Saves",ImGuiTabBarFlags_None)){
         if (igBeginTabItem("Local",NULL,ImGuiTabItemFlags_None)){
@@ -5977,7 +5978,7 @@ void se_draw_menu_panel(){
     }else{
       se_draw_save_states(false);
     }
-  }
+  //}
   se_section(ICON_FK_CLOUD " Google Drive");
   if (!cloud_state.drive){
     bool pending_login = cloud_drive_pending_login();
@@ -6028,8 +6029,8 @@ void se_draw_menu_panel(){
 
   if(emu_state.system==SYSTEM_NDS || emu_state.system == SYSTEM_GBA || emu_state.system == SYSTEM_GB){
     se_section(ICON_FK_KEY " Action Replay Codes");
-    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
-    else{
+    //if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
+    //else{
       int free_cheat_index = -1; 
       for(int i=0;i<SE_NUM_CHEATS;i++){
         se_cheat_t* cheat = &cheats[i];
@@ -6088,7 +6089,7 @@ void se_draw_menu_panel(){
           memset(cheat->buffer,0,sizeof(cheat->buffer));
         }
       }
-    }
+    //}
   }
   #ifdef ENABLE_RETRO_ACHIEVEMENTS
   se_section(ICON_FK_TROPHY " RetroAchievements");
@@ -7204,8 +7205,9 @@ static void frame(void) {
       if(active_button)igPushStyleColorVec4(ImGuiCol_Button, style->Colors[ImGuiCol_ButtonActive]);
       if(se_button_themed(SE_REGION_BLANK+ (active_button? 2:0),toggle_labels[i],(ImVec2){sel_width, SE_MENU_BAR_BUTTON_HEIGHT},true))next_toggle_id = i;
       igSameLine(0,1);
-      if(hardcore_disabled) se_tooltip("Disabled in Hardcore Mode");
-      else se_tooltip(toggle_tooltips[i]);
+      //if(hardcore_disabled) se_tooltip("Disabled in Hardcore Mode");
+      //else se_tooltip(toggle_tooltips[i]);
+      se_tooltip(toggle_tooltips[i]);
       
       if(active_button)igPopStyleColor(1);
 
@@ -7238,18 +7240,18 @@ static void frame(void) {
       } 
     }
 
-    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in){
-      if(emu_state.run_mode==SB_MODE_REWIND||emu_state.run_mode==SB_MODE_STEP){
-        emu_state.run_mode= SB_MODE_RUN;
-        emu_state.step_frames=1;
-      }
-      if(emu_state.step_frames<1&&emu_state.step_frames!=-1)emu_state.step_frames=1; 
-    }
+    //if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in){
+    //  if(emu_state.run_mode==SB_MODE_REWIND||emu_state.run_mode==SB_MODE_STEP){
+    //    emu_state.run_mode= SB_MODE_RUN;
+    //    emu_state.step_frames=1;
+    //  }
+    //  if(emu_state.step_frames<1&&emu_state.step_frames!=-1)emu_state.step_frames=1; 
+    //}
 
-    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in){
-      if(emu_state.run_mode==SB_MODE_REWIND||emu_state.run_mode==SB_MODE_STEP)emu_state.run_mode= SB_MODE_RUN;
-      if(emu_state.step_frames<1&&emu_state.step_frames!=-1)emu_state.step_frames=1; 
-    }
+    //if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in){
+    //  if(emu_state.run_mode==SB_MODE_REWIND||emu_state.run_mode==SB_MODE_STEP)emu_state.run_mode= SB_MODE_RUN;
+    //  if(emu_state.step_frames<1&&emu_state.step_frames!=-1)emu_state.step_frames=1; 
+    //}
 
     if(curr->inputs[SE_KEY_EMU_PAUSE] && !prev->inputs[SE_KEY_EMU_PAUSE]){
       if(emu_state.run_mode!=SB_MODE_RUN){emu_state.run_mode=SB_MODE_RUN;emu_state.step_frames=1;}
