@@ -5960,8 +5960,7 @@ void se_draw_menu_panel(){
   ImGuiStyle *style = igGetStyle();
   int win_w = igGetWindowContentRegionWidth();
   se_section(ICON_FK_FLOPPY_O " Save States");
-  if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in)
-//se_text("Disabled in Hardcore Mode");
+  if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
   else{
     if (cloud_state.drive){
       if (igBeginTabBar("Saves",ImGuiTabBarFlags_None)){
@@ -6029,8 +6028,7 @@ void se_draw_menu_panel(){
 
   if(emu_state.system==SYSTEM_NDS || emu_state.system == SYSTEM_GBA || emu_state.system == SYSTEM_GB){
     se_section(ICON_FK_KEY " Action Replay Codes");
-    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) 
-    //se_text("Disabled in Hardcore Mode");
+    if(gui_state.settings.hardcore_mode&&gui_state.ra_logged_in) se_text("Disabled in Hardcore Mode");
     else{
       int free_cheat_index = -1; 
       for(int i=0;i<SE_NUM_CHEATS;i++){
